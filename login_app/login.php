@@ -18,13 +18,28 @@ $data = json_decode(file_get_contents("php://input"), true);
 $login = $data['login'];
 $password = $data['password'];
 
-$sql = "SELECT * FROM users WHERE login = '$login' AND password = '$password'";
-$result = $conn->query($sql);
+if (empty($login) || empty($password)) {
+    echo json_encode(['success' => false, 'message' => 'Login i hasło są wymagane.']);
+    exit();
+}
 
-if ($result->num_rows > 0) {
+$sql = "SELECT password_hash FROM users WHERE login = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $login);
+$stmt->execute();
+$stmt->bind_result($passwordHash);
+$stmt->fetch();
+$stmt->close();
+
+if (!$passwordHash) {
+    echo json_encode(['success' => false, 'message' => 'Nie znaleziono użytkownika.']);
+    exit();
+}
+
+if (password_verify($password, $passwordHash)) {
     echo json_encode(['success' => true]);
 } else {
-    echo json_encode(['success' => false]);
+    echo json_encode(['success' => false, 'message' => 'Błędne dane logowania!']);
 }
 
 $conn->close();
