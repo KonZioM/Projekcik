@@ -16,6 +16,12 @@
             
             <label for="password">Hasło:</label>
             <input type="password" id="password" name="password" required>
+            <div id="passwordRequirements">
+                <p id="length" class="requirement">Co najmniej 8 znaków</p>
+                <p id="uppercase" class="requirement">Co najmniej 1 wielka litera</p>
+                <p id="number" class="requirement">Co najmniej 1 cyfra</p>
+                <p id="special" class="requirement">Co najmniej 1 znak specjalny (@, $, !, %, *, ?, &, #)</p>
+            </div>
             
             <label for="confirmPassword">Potwierdź hasło:</label>
             <input type="password" id="confirmPassword" name="confirmPassword" required>

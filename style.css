@@ -68,3 +68,27 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+#passwordRequirements {
+    margin-top: 10px;
+    font-size: 14px;
+    display: none;
+}
+
+.requirement {
+    color: red;
+}
+
+.requirement.valid {
+    color: green;
+}
+
+.requirement.invalid {
+    color: red;
+}
+
+#registerMessage {
+    margin-top: 10px;
+    font-size: 16px;
+    display: none;
+}

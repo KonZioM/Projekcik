@@ -23,6 +23,11 @@ if (empty($login) || empty($password)) {
     exit();
 }
 
+if (!preg_match('/^(?=.*[A-Z])(?=.*\d).{6,}$/', $password)) {
+    echo json_encode(['success' => false, 'message' => 'Hasło musi mieć co najmniej 6 znaków, 1 cyfrę i 1 dużą literę!']);
+    exit();
+}
+
 $sql_check = "SELECT id FROM users WHERE login = ?";
 $stmt_check = $conn->prepare($sql_check);
 $stmt_check->bind_param("s", $login);
