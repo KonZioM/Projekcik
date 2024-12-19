@@ -1,4 +1,5 @@
 <?php
+session_start(); // Rozpocznij sesję
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -37,6 +38,7 @@ if (!$passwordHash) {
 }
 
 if (password_verify($password, $passwordHash)) {
+    $_SESSION['user'] = $login; // Zapisz login użytkownika w sesji
     echo json_encode(['success' => true]);
 } else {
     echo json_encode(['success' => false, 'message' => 'Błędne dane logowania!']);

@@ -1,0 +1,98 @@
+/* Tło strony głównej */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('logowanie.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #333;
+}
+
+/* Kontener strony głównej */
+.main-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 85vw;
+    text-align: center;
+}
+
+/* Logo */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Przycisk powrotu w lewym górnym rogu */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #f44336;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Odstęp między strzałką a tekstem */
+}
+
+.back-button span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    background-color: #d32f2f;
+}
+
+.onas-image {
+    width: 100%; /* Dostosowanie szerokości do szerokości kontenera */
+    max-width: 600px; /* Maksymalna szerokość zdjęcia */
+    height: auto; /* Zachowanie proporcji zdjęcia */
+    margin-top: 20px; /* Odstęp od tekstu */
+    border-radius: 8px; /* Zaokrąglone rogi */
+}
+
+.onas-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    margin-top: 30px;
+}
+
+
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1, h2 {
+    color: #2c3e50;
+}
+p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+.highlight {
+    font-weight: bold;
+    color: #e74c3c;
+}
