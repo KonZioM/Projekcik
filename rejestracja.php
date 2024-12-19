@@ -9,7 +9,22 @@ $password = '';
 $database = 'login_app';
 
 $conn = new mysqli($host, $user, $password, $database);
-mieć co najmniej 6 znaków, 1 cyfrę i 1 dużą literę!']); 
+
+if ($conn->connect_error) {
+    die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+}
+
+$data = json_decode(file_get_contents("php://input"), true);
+$login = $data['login'];
+$password = $data['password'];
+
+if (empty($login) || empty($password)) {
+    echo json_encode(['success' => false, 'message' => 'Login i hasło są wymagane.']);
+    exit();
+}
+
+if (!preg_match('/^(?=.*[A-Z])(?=.*\d).{6,}$/', $password)) {
+    echo json_encode(['success' => false, 'message' => 'Hasło musi mieć co najmniej 6 znaków, 1 cyfrę i 1 dużą literę!']);
     exit();
 }
 
@@ -44,19 +59,3 @@ if ($result) {
 $stmt->close();
 $conn->close();
 ?>
-
-if ($conn->connect_error) {
-    die("Błąd połączenia z bazą danych: " . $conn->connect_error);
-}
-
-$data = json_decode(file_get_contents("php://input"), true);
-$login = $data['login'];
-$password = $data['password'];
-
-if (empty($login) || empty($password)) {
-    echo json_encode(['success' => false, 'message' => 'Login i hasło są wymagane.']);
-    exit();
-}
-
-if (!preg_match('/^(?=.*[A-Z])(?=.*\d).{6,}$/', $password)) {
-    echo json_encode(['success' => false, 'message' => 'Hasło musi 
