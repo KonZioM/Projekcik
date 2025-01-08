@@ -7,17 +7,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    min-height: 100vh;
     color: #333;
 }
 
 /* Kontener strony głównej */
 .main-container {
     background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-    max-width: 85vw;
+    max-width: 90vw;
     text-align: center;
 }
 
@@ -47,52 +47,141 @@ body {
     text-align: center;
     display: flex;
     align-items: center;
-    gap: 8px; /* Odstęp między strzałką a tekstem */
-}
-
-.back-button span {
-    font-size: 18px;
-    font-weight: bold;
+    gap: 8px;
 }
 
 .back-button:hover {
     background-color: #d32f2f;
 }
 
+/* Obraz sekcji "O nas" */
 .onas-image {
-    width: 100%; /* Dostosowanie szerokości do szerokości kontenera */
-    max-width: 600px; /* Maksymalna szerokość zdjęcia */
-    height: auto; /* Zachowanie proporcji zdjęcia */
-    margin-top: 20px; /* Odstęp od tekstu */
-    border-radius: 8px; /* Zaokrąglone rogi */
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
 }
 
+/* Kontener sekcji "O nas" */
 .onas-container {
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 80%;
     max-width: 800px;
     margin-top: 30px;
 }
 
-
-
 .container {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     padding: 20px;
 }
+
 h1, h2 {
     color: #2c3e50;
 }
+
 p {
-    font-size: 1.1em;
+    font-size: 1em;
     margin-bottom: 20px;
 }
+
 .highlight {
     font-weight: bold;
     color: #e74c3c;
+}
+
+/* Media queries */
+@media screen and (max-width: 800px) {
+    .main-container {
+        padding: 15px;
+        max-width: 95vw;
+    }
+
+    .back-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .logo {
+        max-width: 120px;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    .onas-image {
+        max-width: 90%;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .main-container {
+        padding: 40px;
+        max-width: 80vw;
+    }
+
+    .back-button {
+        font-size: 18px;
+        padding: 12px 24px;
+    }
+
+    p {
+        font-size: 1.1em;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .main-container {
+        padding: 50px;
+        max-width: 70vw;
+    }
+
+    .back-button {
+        font-size: 20px;
+        padding: 14px 28px;
+    }
+
+    .logo {
+        max-width: 180px;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .main-container {
+        padding: 60px;
+        max-width: 60vw;
+    }
+
+    .logo {
+        max-width: 200px;
+    }
+
+    p {
+        font-size: 1.3em;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .main-container {
+        padding: 70px;
+        max-width: 50vw;
+    }
+
+    .logo {
+        max-width: 250px;
+        display: none;
+    }
+
+    p {
+        font-size: 1.4em;
+    }
 }
