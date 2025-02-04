@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rynek</title>
+    <link rel="stylesheet" href="rynek.css">
+</head>
+<body>
+    <div class="market-container">
+        <div class="logo-container">
+            <img src="Logo.png" alt="Logo" class="logo">
+        </div>
+        <button onclick="location.href='logout.php'" class="logout-button">Wyloguj się</button>
+        <h2>RYNEK - WIG</h2>
+        <div class="chart">
+            <div id="tv_chart_container"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+            <script type="text/javascript">
+                new TradingView.widget({
+                    "width": "100%",
+                    "height": "400",
+                    "symbol": "WIG",
+                    "interval": "D",
+                    "timezone": "Europe/Warsaw",
+                    "theme": "light",
+                    "style": "1",
+                    "locale": "pl",
+                    "container_id": "tv_chart_container",
+                    "allow_symbol_change": true
+                });
+            </script>
+        </div>
+        <div class="top-stats-container">
+            <div class="top-gainers">
+                <h3>Największe wzrosty</h3>
+                <ul>
+                    <li><span>RYVU</span> 51,0000 +6,25%</li>
+                    <li><span>MILLENNIUM</span> 8,9400 +5,42%</li>
+                    <li><span>ALLEGRO</span> 30,2650 +4,40%</li>
+                    <li><span>TEXT</span> 67,4000 +4,17%</li>
+                    <li><span>ETFBNQ3LV</span> 1 038,4000 +3,53%</li>
+                </ul>
+            </div>
+            <div class="top-decliners">
+                <h3>Największe spadki</h3>
+                <ul>
+                    <li><span>PGE</span> 6,0520 -3,94%</li>
+                    <li><span>TAURONPE</span> 3,3220 -3,37%</li>
+                    <li><span>CLNPHARMA</span> 26,3500 -2,77%</li>
+                    <li><span>ETFBNQ2ST</span> 143,4800 -2,58%</li>
+                    <li><span>WIRTUALNA</span> 74,2000 -2,37%</li>
+                </ul>
+            </div>
+        </div>
+        <div class="top-turnovers">
+            <h3>Największe obroty</h3>
+            <ul>
+                <li><span>PKOBP</span> 59,1000 ▲ +2,25% Obrót: 167 423 297</li>
+                <li><span>PZU</span> 45,8800 ▲ +1,24% Obrót: 154 006 229</li>
+                <li><span>CDPROJEKT</span> 179,9000 ▲ +0,25% Obrót: 108 343 902</li>
+                <li><span>PEKAO</span> 145,8500 ▲ +1,78% Obrót: 79 314 940</li>
+                <li><span>PKNORLEN</span> 51,6600 ▲ +0,64% Obrót: 77 799 506</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
