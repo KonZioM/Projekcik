@@ -18,10 +18,46 @@
             <label for="password">Hasło:</label>
             <input type="password" id="password" name="password" required>
             
-            <button type="submit" class="login-button">LOGIN</button>
+            <button type="submit" class="login-button">ZALOGUJ</button>
         </form>
         <p id="loginMessage"></p>
         <p>Nie masz konta? <a href="rejestracja.html">Zarejestruj się</a></p>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('loginForm');
+            const loginMessage = document.getElementById('loginMessage');
+
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const login = document.getElementById('login').value;
+                const password = document.getElementById('password').value;
+
+                if (!login || !password) {
+                    loginMessage.textContent = 'Wypełnij wszystkie pola!';
+                    loginMessage.style.color = 'red';
+                    return;
+                }
+
+                try {
+                    localStorage.setItem('username', login);
+                    
+                    loginMessage.textContent = 'Logowanie udane!';
+                    loginMessage.style.color = 'green';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'profil.html';
+                    }, 1500);
+
+                } catch (error) {
+                    console.error('Błąd logowania:', error);
+                    loginMessage.textContent = 'Błąd logowania! Spróbuj ponownie.';
+                    loginMessage.style.color = 'red';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
