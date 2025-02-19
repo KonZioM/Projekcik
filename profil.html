@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil użytkownika</title>
+    <link rel="stylesheet" href="rynek.css">
+</head>
+<body>
+    <div class="user-profile">
+        <div class="profile-icon" onclick="toggleProfileMenu()">
+            <img src="user-icon.png" alt="Profil użytkownika">
+        </div>
+        <div class="profile-menu" id="profileMenu">
+            <ul>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="ustawienia.html">Ustawienia</a></li>
+                <li><a href="logout.php">Wyloguj się</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="market-container">
+        <div class="logo-container">
+            <img src="Logo.png" alt="Logo" class="logo">
+        </div>
+        <h2>Profil użytkownika</h2>
+        <div class="profile-info">
+            <p>Witaj, <span id="username"></span>!</p>
+        </div>
+        <button onclick="location.href='rynek.html'" class="back-button">Powrót do rynku</button>
+    </div>
+
+    <script>
+        const username = localStorage.getItem('username') || 'Gość';
+        document.getElementById('username').textContent = username;
+    </script>
+</body>
+</html>

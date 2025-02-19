@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ustawienia</title>
+    <link rel="stylesheet" href="rynek.css">
+</head>
+<body>
+    <div class="market-container">
+        <div class="logo-container">
+            <img src="Logo.png" alt="Logo" class="logo">
+        </div>
+        <h2>Ustawienia</h2>
+        <div class="settings-info">
+            <p>Tutaj możesz zmienić swoje ustawienia.</p>
+        </div>
+        <div class="profile-picture-container">
+            <h3>Zmień swoje zdjęcie profilowe</h3>
+            <form action="aktualizacje.php" method="POST" enctype="multipart/form-data">
+                <input type="file" name="profile_picture" accept="image/*" required>
+                <button type="submit">Zmień profilowe</button>
+            </form>
+        </div>
+        <button onclick="location.href='rynek.html'" class="back-button">Powrót do rynku</button>
+    </div>
+</body>
+</html>
