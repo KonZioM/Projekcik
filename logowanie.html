@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <button onclick="location.href='index.html'" class="back-button"><span>&larr;</span> Powrót</button>
+    <div class="login-container">
+        <h2>Logowanie</h2>
+        <form id="loginForm">
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" required>
+            
+            <label for="password">Hasło:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit" class="login-button">ZALOGUJ</button>
+        </form>
+        <p id="loginMessage"></p>
+        <p>Nie masz konta? <a href="rejestracja.html">Zarejestruj się</a></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('loginForm');
+            const loginMessage = document.getElementById('loginMessage');
+
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const login = document.getElementById('login').value;
+                const password = document.getElementById('password').value;
+
+                // Prosta walidacja
+                if (!login || !password) {
+                    loginMessage.textContent = 'Wypełnij wszystkie pola!';
+                    loginMessage.style.color = 'red';
+                    return;
+                }
+
+                try {
+                    // Wyślij dane logowania do serwera
+                    const response = await fetch('login.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ login, password })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        // Zalogowano pomyślnie
+                        localStorage.setItem('username', login);
+                        loginMessage.textContent = 'Logowanie udane! Przekierowanie...';
+                        loginMessage.style.color = 'green';
+
+                        // Przekieruj po 1.5 sekundy
+                        setTimeout(() => {
+                            window.location.href = 'profil.html';
+                        }, 1500);
+                    } else {
+                        // Błędne dane logowania
+                        loginMessage.textContent = result.message || 'Błędny login lub hasło!';
+                        loginMessage.style.color = 'red';
+                    }
+                } catch (error) {
+                    console.error('Błąd logowania:', error);
+                    loginMessage.textContent = 'Wystąpił błąd podczas logowania. Spróbuj ponownie.';
+                    loginMessage.style.color = 'red';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

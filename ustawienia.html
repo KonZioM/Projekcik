@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ustawienia</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="ustawienia.js" defer></script>
+</head>
+<body>
+    <button onclick="location.href='profil.html'" class="back-button"><span>&larr;</span> Powrót</button>
+    <div class="login-container">
+        <h2>Zmiana hasła</h2>
+        <form id="changePasswordForm">
+            <label for="currentPassword">Aktualne hasło:</label>
+            <input type="password" id="currentPassword" name="currentPassword" required>
+            
+            <label for="newPassword">Nowe hasło:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+            
+            <label for="confirmNewPassword">Potwierdź nowe hasło:</label>
+            <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+            
+            <button type="submit" class="login-button">Zmień hasło</button>
+        </form>
+        <p id="changePasswordMessage"></p>
+    </div>
+</body>
+</html>
