@@ -12,19 +12,17 @@ $database = 'login_app';
 $conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
-    die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+    die(json_encode(['success' => false, 'message' => 'Błąd połączenia z bazą danych: ' . $conn->connect_error]));
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
-$marketData = $data['data'];
-$type = $data['type'];
+error_log(print_r($data, true));
 
-if (empty($marketData) || !in_array($type, ['gain', 'loss'])) {
+if (empty($data['data']) || !in_array($data['type'], ['gain', 'loss'])) {
     echo json_encode(['success' => false, 'message' => 'Nieprawidłowe dane.']);
     exit();
 }
 
-// Przygotuj zapytanie SQL
 $sql = "INSERT INTO market_data (ticker, price, change_percentage, type) VALUES (?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 
@@ -33,12 +31,12 @@ if (!$stmt) {
     exit();
 }
 
-foreach ($marketData as $item) {
+foreach ($data['data'] as $item) {
     $ticker = $item['ticker'];
     $price = $item['price'];
     $changePercentage = str_replace('%', '', $item['change_percentage']); // Usuń znak %
 
-    $stmt->bind_param("sdds", $ticker, $price, $changePercentage, $type);
+    $stmt->bind_param("sdds", $ticker, $price, $changePercentage, $data['type']);
     $stmt->execute();
 }
 

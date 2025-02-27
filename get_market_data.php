@@ -15,7 +15,6 @@ if ($conn->connect_error) {
     die(json_encode(['success' => false, 'message' => 'Błąd połączenia z bazą danych: ' . $conn->connect_error]));
 }
 
-// Pobierz najnowsze dane z bazy danych
 $sqlGainers = "SELECT ticker, price, change_percentage FROM market_data WHERE type = 'gain' ORDER BY timestamp DESC LIMIT 5";
 $sqlLosers = "SELECT ticker, price, change_percentage FROM market_data WHERE type = 'loss' ORDER BY timestamp DESC LIMIT 5";
 

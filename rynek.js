@@ -70,6 +70,8 @@ async function loadMarketDataFromDatabase() {
 
 async function saveMarketData(data, type) {
     try {
+        console.log('Wysyłane dane:', { data, type });
+
         const response = await fetch('save_market_data.php', {
             method: 'POST',
             headers: {
@@ -79,6 +81,8 @@ async function saveMarketData(data, type) {
         });
 
         const result = await response.json();
+        console.log('Odpowiedź z PHP:', result);
+
         if (!result.success) {
             console.error('Błąd zapisywania danych:', result.message);
         }
@@ -114,6 +118,24 @@ function updateTopDecliners(decliners) {
         declinersList.appendChild(li);
     });
 }
+
+function toggleProfileMenu() {
+    const menu = document.getElementById('profileMenu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+document.addEventListener('click', (e) => {
+    const profileMenu = document.getElementById('profileMenu');
+    const profileIcon = document.querySelector('.profile-icon');
+    
+    if (!profileIcon.contains(e.target) && !profileMenu.contains(e.target)) {
+        profileMenu.style.display = 'none';
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('profileMenu').style.display = 'none';
+});
 
 fetchMarketData();
 setInterval(fetchMarketData, 5 * 60 * 1000); // Pobieraj dane co 5 minut
