@@ -1,0 +1,147 @@
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode .main-container {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode h1 {
+    color: #64ff6b;
+}
+
+.dark-mode p {
+    color: #eee;
+}
+
+.dark-mode .main-buttons .main-button {
+    background-color: #64ff6b;
+    color: #333;
+}
+
+.dark-mode .main-buttons .main-button:hover {
+    background-color: #50d956;
+}
+
+.dark-mode .dark-mode-switch {
+    color: #fff;
+}
+
+.dark-mode .back-button {
+    background-color: #d32f2f;
+    color: #fff;
+}
+
+.dark-mode .profile-icon {
+    border-color: #64ff6b;
+}
+
+.dark-mode .profile-menu {
+    background: #333;
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .profile-menu ul li a {
+    color: #eee;
+}
+
+.dark-mode .profile-menu ul li a:hover {
+    color: #64ff6b;
+}
+
+.dark-mode .market-container {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .logo {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+}
+
+.dark-mode h2 {
+    color: #64ff6b;
+}
+
+.dark-mode .top-gainers,
+.dark-mode .top-decliners,
+.dark-mode .top-turnovers {
+    background: #333;
+    color: #fff;
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .top-gainers h3,
+.dark-mode .top-decliners h3,
+.dark-mode .top-turnovers h3 {
+    color: #64ff6b;
+}
+
+.dark-mode .top-gainers li,
+.dark-mode .top-decliners li,
+.dark-mode .top-turnovers li {
+    border-bottom: 1px solid #555;
+}
+
+.dark-mode .positive {
+    color: #64ff6b;
+}
+
+.dark-mode .negative {
+    color: #ff776b;
+}
+
+/* Dodatkowe style dla stron logowania i rejestracji */
+.dark-mode .login-container {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode h2 {
+    color: #64ff6b;
+}
+
+.dark-mode label {
+    color: #eee;
+}
+
+.dark-mode input {
+    background-color: #444;
+    color: #eee;
+    border: 1px solid #666;
+}
+
+.dark-mode button {
+    background-color: #64ff6b;
+    color: #333;
+}
+
+.dark-mode button:hover {
+    background-color: #50d956;
+}
+
+.dark-mode p {
+    color: #eee;
+}
+
+.dark-mode a {
+    color: #64ff6b;
+}
+
+/* Dodatkowe style dla strony onas.html */
+.dark-mode .onas-container {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .onas-container h1,
+.dark-mode .onas-container h2,
+.dark-mode .onas-container p,
+.dark-mode .onas-container li {
+    color: #eee;
+}
