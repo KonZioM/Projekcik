@@ -1,0 +1,389 @@
+/* Przycisk powrotu */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #f44336;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Odstęp między strzałką a tekstem */
+}
+
+.back-button span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Styl ogólny dla strony */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('logowanie.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+}
+
+/* Kontener logowania i rejestracji */
+.login-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Formularze */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Przyciski formularzy */
+button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Linki */
+p {
+    margin-top: 10px;
+}
+
+a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Wymagania hasła */
+#passwordRequirements {
+    margin-top: 10px;
+    font-size: 14px;
+    display: none;
+}
+
+.requirement {
+    color: red;
+}
+
+.requirement.valid {
+    color: green;
+}
+
+.requirement.invalid {
+    color: red;
+}
+
+/* Komunikat rejestracji */
+#registerMessage {
+    margin-top: 10px;
+    font-size: 16px;
+    display: none;
+}
+
+/* Tooltip w rejestracji */
+.password-container {
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateX(10px) translateY(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    display: none;
+    width: 250px;
+}
+
+.password-container:hover .tooltip {
+    display: block;
+}
+
+/* Sekcja rynku */
+.market-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #4CAF50;
+}
+
+/* Wykres */
+.chart {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 30px;
+}
+
+/* Największe wzrosty, spadki i obroty */
+.top-gainers, .top-decliners, .top-turnovers {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 48%;
+    margin: 10px;
+}
+
+.top-stats-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.top-gainers h3, .top-decliners h3, .top-turnovers h3 {
+    text-align: left;
+    margin-top: 0;
+    font-size: 18px;
+    color: #4CAF50;
+}
+
+.top-gainers ul, .top-decliners ul, .top-turnovers ul {
+    list-style: none;
+    padding: 0;
+}
+
+.top-gainers li, .top-decliners li, .top-turnovers li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.top-gainers li:last-child, .top-decliners li:last-child, .top-turnovers li:last-child {
+    border-bottom: none;
+}
+
+.top-gainers li span, .top-decliners li span {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.top-decliners li span {
+    color: #F44336;
+}
+
+.top-gainers li:before {
+    content: '↑';
+    color: #4CAF50;
+    margin-right: 5px;
+}
+
+.top-decliners li:before {
+    content: '↓';
+    color: #F44336;
+    margin-right: 5px;
+}
+
+.top-turnovers li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.top-turnovers li:last-child {
+    border-bottom: none;
+}
+
+.top-turnovers li span {
+    font-weight: bold;
+    color: #2196F3;
+}
+
+.top-turnovers li:before {
+    content: '💰';
+    margin-right: 5px;
+}
+
+/* Logo */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+}
+
+/* Media queries */
+@media screen and (max-width: 800px) {
+    .login-container {
+        width: 90%;
+        padding: 15px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    button {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .login-container {
+        width: 400px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .login-container {
+        width: 450px;
+    }
+    h2 {
+        font-size: 28px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .login-container {
+        width: 500px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .login-container {
+        width: 600px;
+    }
+    h2 {
+        font-size: 32px;
+    }
+}
+
+/* Przełącznik trybu ciemnego */
+.dark-mode-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    z-index: 1000;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Zaokrąglone suwaki */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

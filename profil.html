@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil użytkownika</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="user-profile">
+        <div class="profile-icon" onclick="toggleProfileMenu()">
+            <img src="user-icon.png" alt="Profil użytkownika" id="profileImage">
+        </div>
+        <div class="profile-menu" id="profileMenu">
+            <ul>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="ustawienia.html">Ustawienia</a></li>
+                <li><a href="logout.php">Wyloguj się</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="market-container">
+        <div class="logo-container">
+            <img src="Logo.png" alt="Logo" class="logo">
+        </div>
+        <h2>Profil użytkownika</h2>
+        
+        <div class="profile-info">
+            <div class="current-data">
+                <p>Aktualna nazwa: <span id="currentUsername"></span></p>
+                <img src="" alt="Aktualne zdjęcie profilowe" id="currentProfileImage" class="profile-preview">
+            </div>
+
+            <form id="changeUsernameForm">
+                <h3>Zmiana nazwy użytkownika</h3>
+                <input type="text" id="newUsername" placeholder="Nowa nazwa użytkownika" required>
+                <button type="submit">Zapisz zmiany</button>
+            </form>
+
+            <form id="changeProfileImageForm">
+                <h3>Zmiana zdjęcia profilowego</h3>
+                <input type="file" id="profileImageInput" accept="image/*" required>
+                <button type="submit">Zaktualizuj zdjęcie</button>
+            </form>
+            
+            <button onclick="location.href='rynek.html'" class="back-button">Powrót do rynku</button>
+        </div>
+    </div>
+    <div class="dark-mode-switch">
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider round"></span>
+        </label>
+        <label for="darkModeToggle">Tryb Ciemny</label>
+    </div>
+    <script src="script.js" defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const username = localStorage.getItem('username') || 'Gość';
+            const profileImage = localStorage.getItem('profileImage');
+            
+            document.getElementById('currentUsername').textContent = username;
+            
+            if(profileImage) {
+                document.getElementById('currentProfileImage').src = profileImage;
+                document.getElementById('profileImage').src = profileImage;
+            }
+        });
+
+        document.getElementById('changeUsernameForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newUsername = document.getElementById('newUsername').value;
+            
+            if(newUsername) {
+                localStorage.setItem('username', newUsername);
+                document.getElementById('currentUsername').textContent = newUsername;
+                alert('Nazwa użytkownika została zmieniona!');
+            }
+        });
+
+        document.getElementById('changeProfileImageForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const file = document.getElementById('profileImageInput').files[0];
+            
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const imageData = e.target.result;
+                    localStorage.setItem('profileImage', imageData);
+                    document.getElementById('currentProfileImage').src = imageData;
+                    document.getElementById('profileImage').src = imageData;
+                    alert('Zdjęcie profilowe zostało zaktualizowane!');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function toggleProfileMenu() {
+        const menu = document.getElementById('profileMenu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Zamknij menu przy kliknięciu gdziekolwiek indziej
+    document.addEventListener('click', (e) => {
+        if(!e.target.closest('.user-profile')) {
+            document.getElementById('profileMenu').style.display = 'none';
+        }
+    });
+
+    // Inicjalizacja - ukryj menu na starcie
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('profileMenu').style.display = 'none';
+    });
+    </script>
+
+<style>
+    .profile-menu {
+        display: none; /* Dodaj to */
+        position: absolute;
+        top: 50px;
+        left: 0;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        min-width: 150px;
+        z-index: 1000; /* Dodaj to */
+    }
+    .user-profile {
+        display: none;
+    }
+</style>
+</body>
+</html>
