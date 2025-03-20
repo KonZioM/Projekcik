@@ -1,0 +1,246 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('logowanie.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+.main-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 90vw;
+    text-align: center;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 150px;
+    height: auto;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #f44336;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-button:hover {
+    background-color: #d32f2f;
+}
+
+.onas-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.onas-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 800px;
+    margin-top: 30px;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #2c3e50;
+}
+
+p {
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+@media screen and (max-width: 800px) {
+    .main-container {
+        padding: 15px;
+        max-width: 95vw;
+    }
+
+    .back-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .logo {
+        max-width: 120px;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    .onas-image {
+        max-width: 90%;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .main-container {
+        padding: 40px;
+        max-width: 80vw;
+    }
+
+    .back-button {
+        font-size: 18px;
+        padding: 12px 24px;
+    }
+
+    p {
+        font-size: 1.1em;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .main-container {
+        padding: 50px;
+        max-width: 70vw;
+    }
+
+    .back-button {
+        font-size: 20px;
+        padding: 14px 28px;
+    }
+
+    .logo {
+        max-width: 180px;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .main-container {
+        padding: 60px;
+        max-width: 60vw;
+    }
+
+    .logo {
+        max-width: 200px;
+    }
+
+    p {
+        font-size: 1.3em;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .main-container {
+        padding: 70px;
+        max-width: 50vw;
+    }
+
+    .logo {
+        max-width: 250px;
+        
+    }
+
+    p {
+        font-size: 1.4em;
+    }
+}
+
+.dark-mode-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    z-index: 1000;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rynek - WIG</title>
+    <link rel="stylesheet" href="rynek.css">
+</head>
+<body>
+    <div class="user-profile">
+        <div class="profile-icon" onclick="toggleProfileMenu()">
+            <img src="user-icon.png" alt="Profil użytkownika">
+        </div>
+        <div class="profile-menu" id="profileMenu">
+            <ul>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="ustawienia.html">Ustawienia</a></li>
+                <li><a href="logout.php">Wyloguj się</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="market-container">
+        <div class="logo-container">
+            <img src="Logo.png" alt="Logo" class="logo">
+        </div>
+        <h2>RYNEK - WIG</h2>
+        <div class="chart">
+            <div id="tv_chart_container"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+            <script type="text/javascript">
+                new TradingView.widget({
+                    "width": "100%",
+                    "height": "400",
+                    "symbol": "WIG",
+                    "interval": "D",
+                    "timezone": "Europe/Warsaw",
+                    "theme": "light",
+                    "style": "1",
+                    "locale": "pl",
+                    "container_id": "tv_chart_container",
+                    "allow_symbol_change": true
+                });
+            </script>
+        </div>
+
+        <div class="market-overview">
+            <div class="top-movers">
+                <div class="top-gainers">
+                    <h3>Największe wzrosty</h3>
+                    <ul id="top-gainers-list"></ul>
+                </div>
+
+                <div class="top-decliners">
+                    <h3>Największe spadki</h3>
+                    <ul id="top-decliners-list"></ul>
+                </div>
+
+                <div class="top-turnovers">
+                    <h3>Największe obroty</h3>
+                    <ul id="top-turnovers-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="rynek.js"></script>
+    <div class="dark-mode-switch">
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider round"></span>
+        </label>
+        <label for="darkModeToggle">Tryb Ciemny</label>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+</html>

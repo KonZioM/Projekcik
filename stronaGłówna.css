@@ -1,0 +1,238 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('logowanie.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.main-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 85vw;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 150px;
+    height: auto;
+}
+
+h1 {
+    font-size: 36px;
+    color: #4CAF50;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.main-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.main-buttons .main-button {
+    padding: 15px 30px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.main-buttons .main-button:hover {
+    background-color: #45a049;
+}
+
+.dark-mode-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    z-index: 1000;
+}
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 800px) {
+    .main-container {
+        padding: 20px;
+        max-width: 95vw;
+    }
+
+    .logo {
+        max-width: 120px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .main-buttons .main-button {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+
+    .main-buttons {
+        gap: 10px;
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .main-container {
+        padding: 40px;
+        max-width: 80vw;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .main-container {
+        padding: 50px;
+        max-width: 70vw;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 22px;
+    }
+
+    .logo {
+        max-width: 180px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .main-container {
+        padding: 60px;
+        max-width: 60vw;
+    }
+
+    h1 {
+        font-size: 44px;
+    }
+
+    p {
+        font-size: 24px;
+    }
+
+    .logo {
+        max-width: 200px;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .main-container {
+        padding: 70px;
+        max-width: 50vw;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    p {
+        font-size: 26px;
+    }
+
+    .logo {
+        max-width: 250px;
+    }
+}
