@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const newPassword = document.getElementById('newPassword').value;
         const confirmNewPassword = document.getElementById('confirmNewPassword').value;
 
-        // Walidacja
         if (newPassword !== confirmNewPassword) {
             changePasswordMessage.textContent = 'Nowe hasła nie są zgodne!';
             changePasswordMessage.style.color = 'red';
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            // Wyślij dane do serwera
             const response = await fetch('change_password.php', {
                 method: 'POST',
                 headers: {
@@ -40,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.success) {
                 changePasswordMessage.textContent = 'Hasło zostało zmienione!';
                 changePasswordMessage.style.color = 'green';
-                changePasswordForm.reset(); // Wyczyść formularz
+                changePasswordForm.reset(); 
             } else {
                 changePasswordMessage.textContent = result.message || 'Wystąpił błąd podczas zmiany hasła.';
                 changePasswordMessage.style.color = 'red';

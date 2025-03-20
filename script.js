@@ -25,13 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
     }
 
-    // Ustaw początkowy motyw na podstawie preferencji systemu
+ 
     setThemeBasedOnSystemPreference();
 
-    // Nasłuchuj zmian preferencji systemowych
     window.matchMedia('(prefers-color-scheme: dark)').addListener(setThemeBasedOnSystemPreference);
 
-    // Obsługa ręcznego przełączania motywu
     if (darkModeToggle) {
         darkModeToggle.addEventListener('change', () => {
             body.classList.toggle('dark-mode');

@@ -34,7 +34,7 @@ if (!$stmt) {
 foreach ($data['data'] as $item) {
     $ticker = $item['ticker'];
     $price = $item['price'];
-    $changePercentage = str_replace('%', '', $item['change_percentage']); // Usuń znak %
+    $changePercentage = str_replace('%', '', $item['change_percentage']);
 
     $stmt->bind_param("sdds", $ticker, $price, $changePercentage, $data['type']);
     $stmt->execute();

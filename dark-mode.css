@@ -94,7 +94,6 @@ body.dark-mode {
     color: #ff776b;
 }
 
-/* Dodatkowe style dla stron logowania i rejestracji */
 .dark-mode .login-container {
     background: rgba(0, 0, 0, 0.9);
     color: #fff;
@@ -132,7 +131,6 @@ body.dark-mode {
     color: #64ff6b;
 }
 
-/* Dodatkowe style dla strony onas.html */
 .dark-mode .onas-container {
     background: rgba(0, 0, 0, 0.9);
     color: #fff;

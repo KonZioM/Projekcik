@@ -69,7 +69,6 @@ p {
     background-color: #45a049;
 }
 
-/* Przełącznik trybu ciemnego */
 .dark-mode-switch {
     position: fixed;
     top: 20px;
@@ -129,7 +128,6 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* Zaokrąglone suwaki */
 .slider.round {
     border-radius: 34px;
 }

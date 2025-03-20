@@ -24,7 +24,6 @@ if (empty($currentPassword) || empty($newPassword)) {
     exit();
 }
 
-// Pobierz login użytkownika z sesji
 if (!isset($_SESSION['user'])) {
     echo json_encode(['success' => false, 'message' => 'Użytkownik niezalogowany.']);
     exit();
@@ -32,7 +31,6 @@ if (!isset($_SESSION['user'])) {
 
 $login = $_SESSION['user'];
 
-// Pobierz aktualne hasło z bazy danych
 $sql = "SELECT password_hash FROM users WHERE login = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $login);
@@ -41,13 +39,11 @@ $stmt->bind_result($passwordHash);
 $stmt->fetch();
 $stmt->close();
 
-// Sprawdź, czy aktualne hasło jest poprawne
 if (!password_verify($currentPassword, $passwordHash)) {
     echo json_encode(['success' => false, 'message' => 'Aktualne hasło jest nieprawidłowe.']);
     exit();
 }
 
-// Zaktualizuj hasło w bazie danych
 $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
 $sql = "UPDATE users SET password_hash = ? WHERE login = ?";
 $stmt = $conn->prepare($sql);
