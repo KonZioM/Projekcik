@@ -64,14 +64,24 @@
         </div>
     </div>
 
-    <script src="rynek.js"></script>
+    <!-- Dodanie przycisków -->
     <div class="dark-mode-switch">
         <label class="switch">
             <input type="checkbox" id="darkModeToggle">
             <span class="slider round"></span>
         </label>
         <label for="darkModeToggle">Tryb Ciemny</label>
+
+        <!-- Przycisk przełączania trybu rysowania -->
+        <button id="toggleDrawMode" class="switch-style">Włącz tryb rysowania</button>
+        <input type="color" id="colorPicker" value="#000000" style="display: none;">
     </div>
-    <script src="script.js" defer></script>
+
+    <!-- Canvas do rysowania -->
+    <canvas id="drawingCanvas"></canvas>
+
+    <!-- Skrypty -->
+    <script src="rynek.js"></script>
+    <script src="rysowanie.js"></script>
 </body>
 </html>

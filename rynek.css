@@ -10,6 +10,52 @@ body {
     color: #333;
 }
 
+.toolbar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    pointer-events: none;
+    touch-action: none;
+}
+.toolbar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.toolbar button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.market-container {
+    position: relative;
+    z-index: 20; /* Wyższy niż canvas */
+}
+
 .back-button {
     position: absolute;
     top: 20px;
@@ -310,4 +356,22 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+/* Stylizacja dla przycisku przełączania trybu rysowania */
+button.switch-style {
+    padding: 10px 20px; /* Rozmiar przycisku */
+    font-size: 16px; /* Rozmiar tekstu */
+    border-radius: 34px; /* Zaokrąglone rogi */
+    border: none; /* Bez obramowania */
+    background-color: #ccc; /* Kolor tła */
+    color: #333; /* Kolor tekstu */
+    cursor: pointer; /* Kursor wskazujący na interaktywność */
+}
+
+button.switch-style:hover {
+    background-color: #4CAF50; /* Zmiana koloru na zielony po najechaniu */
+}
+input#colorPicker {
+    margin-top: 10px;
 }
