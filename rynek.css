@@ -53,7 +53,7 @@ canvas {
 
 .market-container {
     position: relative;
-    z-index: 20; /* Wyższy niż canvas */
+    z-index: 20;
 }
 
 .back-button {

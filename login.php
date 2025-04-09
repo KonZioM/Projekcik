@@ -30,6 +30,7 @@ $stmt->bind_param("s", $login);
 $stmt->execute();
 $stmt->bind_result($userId, $passwordHash);
 $stmt->fetch();
+$stmt->close();
 
 if (!$passwordHash) {
     echo json_encode(['success' => false, 'message' => 'Nieprawidłowe dane logowania']);
@@ -39,11 +40,18 @@ if (!$passwordHash) {
 if (password_verify($password, $passwordHash)) {
     $_SESSION['user'] = $login;
     $_SESSION['user_id'] = $userId;
+
+    $action = "Logowanie";
+    $sql_activity = "INSERT INTO user_activity (user_id, action) VALUES (?, ?)";
+    $stmt_activity = $conn->prepare($sql_activity);
+    $stmt_activity->bind_param("is", $userId, $action);
+    $stmt_activity->execute();
+    $stmt_activity->close();
+
     echo json_encode(['success' => true]);
 } else {
     echo json_encode(['success' => false, 'message' => 'Nieprawidłowe hasło']);
 }
 
-$stmt->close();
 $conn->close();
 ?>
