@@ -11,7 +11,7 @@ $database = 'login_app';
 $conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
-    die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+    die(json_encode(['success' => false, 'message' => 'Błąd połączenia z bazą danych']));
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
@@ -37,7 +37,6 @@ $stmt_check->store_result();
 if ($stmt_check->num_rows > 0) {
     echo json_encode(['success' => false, 'message' => 'Nazwa zajęta. Wybierz inną.']);
     $stmt_check->close();
-    $conn->close();
     exit();
 }
 
@@ -45,17 +44,16 @@ $stmt_check->close();
 
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-$sql = "INSERT INTO users (login, password_hash) VALUES (?, ?)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $login, $hashedPassword);
-$result = $stmt->execute();
+$sql_insert = "INSERT INTO users (login, password_hash) VALUES (?, ?)";
+$stmt_insert = $conn->prepare($sql_insert);
+$stmt_insert->bind_param("ss", $login, $hashedPassword);
 
-if ($result) {
+if ($stmt_insert->execute()) {
     echo json_encode(['success' => true, 'message' => 'Rejestracja powiodła się!']);
 } else {
-    echo json_encode(['success' => false, 'message' => 'Wystąpił błąd rejestracji: ' . $stmt->error]);
+    echo json_encode(['success' => false, 'message' => 'Wystąpił błąd rejestracji.']);
 }
 
-$stmt->close();
+$stmt_insert->close();
 $conn->close();
 ?>

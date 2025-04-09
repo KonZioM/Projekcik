@@ -41,5 +41,40 @@
         <label for="darkModeToggle">Tryb Ciemny</label>
     </div>
     <script src="script.js" defer></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+        
+            if (password !== confirmPassword) {
+                alert('Hasła nie są identyczne!');
+                return;
+            }
+        
+            try {
+                const response = await fetch('rejestracja.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ login, password })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Rejestracja udana! Zaloguj się.');
+                    window.location.href = 'logowanie.html';
+                } else {
+                    alert('Błąd: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Błąd:', error);
+                alert('Błąd połączenia z serwerem');
+            }
+        });
+        </script>
+        
 </body>
 </html>
