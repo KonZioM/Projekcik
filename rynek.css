@@ -358,20 +358,44 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-/* Stylizacja dla przycisku przełączania trybu rysowania */
 button.switch-style {
-    padding: 10px 20px; /* Rozmiar przycisku */
-    font-size: 16px; /* Rozmiar tekstu */
-    border-radius: 34px; /* Zaokrąglone rogi */
-    border: none; /* Bez obramowania */
-    background-color: #ccc; /* Kolor tła */
-    color: #333; /* Kolor tekstu */
-    cursor: pointer; /* Kursor wskazujący na interaktywność */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 34px;
+    border: none; 
+    background-color: #ccc;
+    color: #333;
+    cursor: pointer;
 }
 
 button.switch-style:hover {
-    background-color: #4CAF50; /* Zmiana koloru na zielony po najechaniu */
+    background-color: #4CAF50;
 }
 input#colorPicker {
     margin-top: 10px;
+}
+
+.quiz-button {
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.quiz-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.quiz-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
 }
