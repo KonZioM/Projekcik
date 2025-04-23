@@ -102,14 +102,12 @@
         menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
 
-    // Zamknij menu przy kliknięciu gdziekolwiek indziej
     document.addEventListener('click', (e) => {
         if(!e.target.closest('.user-profile')) {
             document.getElementById('profileMenu').style.display = 'none';
         }
     });
 
-    // Inicjalizacja - ukryj menu na starcie
     document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('profileMenu').style.display = 'none';
     });
@@ -117,7 +115,7 @@
 
 <style>
     .profile-menu {
-        display: none; /* Dodaj to */
+        display: none;
         position: absolute;
         top: 50px;
         left: 0;
@@ -126,11 +124,31 @@
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
         padding: 10px;
         min-width: 150px;
-        z-index: 1000; /* Dodaj to */
+        z-index: 1000; 
     }
     .user-profile {
         display: none;
     }
 </style>
+<div class="activity-container">
+    <h2>Historia aktywności</h2>
+    <ul id="activityList"></ul>
+</div>
+<script>
+    fetch('get_user_activity.php')
+        .then(response => response.json())
+        .then(data => {
+            const activityList = document.getElementById('activityList');
+            data.forEach(activity => {
+                const li = document.createElement('li');
+                li.textContent = `${activity.action} - ${activity.timestamp}`;
+                activityList.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error('Błąd podczas pobierania historii aktywności:', error);
+        });
+</script>
+
 </body>
 </html>

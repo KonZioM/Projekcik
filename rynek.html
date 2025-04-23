@@ -19,7 +19,7 @@
             </ul>
         </div>
     </div>
-
+    <a href="quiz.html" class="quiz-button">Quiz Finansowy</a>
     <div class="market-container">
         <div class="logo-container">
             <img src="Logo.png" alt="Logo" class="logo">
@@ -63,15 +63,20 @@
             </div>
         </div>
     </div>
-
-    <script src="rynek.js"></script>
     <div class="dark-mode-switch">
         <label class="switch">
             <input type="checkbox" id="darkModeToggle">
             <span class="slider round"></span>
         </label>
         <label for="darkModeToggle">Tryb Ciemny</label>
+
+        <button id="toggleDrawMode" class="switch-style">Włącz tryb rysowania</button>
+        <input type="color" id="colorPicker" value="#000000" style="display: none;">
     </div>
-    <script src="script.js" defer></script>
+
+    <canvas id="drawingCanvas"></canvas>
+
+    <script src="rynek.js"></script>
+    <script src="rysowanie.js"></script>
 </body>
 </html>

@@ -26,51 +26,35 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginForm = document.getElementById('loginForm');
-            const loginMessage = document.getElementById('loginMessage');
-
+            
             loginForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
                 const login = document.getElementById('login').value;
                 const password = document.getElementById('password').value;
-
-                if (!login || !password) {
-                    loginMessage.textContent = 'Wypełnij wszystkie pola!';
-                    loginMessage.style.color = 'red';
-                    return;
-                }
-
+        
                 try {
                     const response = await fetch('login.php', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({ login, password })
                     });
-
+        
                     const result = await response.json();
-
+                    
                     if (result.success) {
-
-                        localStorage.setItem('username', login);
-                        loginMessage.textContent = 'Logowanie udane! Przekierowanie...';
-                        loginMessage.style.color = 'green';
-                        setTimeout(() => {
-                            window.location.href = 'rynek.html';
-                        }, 1500);
+                        window.location.href = 'rynek.html';
                     } else {
-                        loginMessage.textContent = result.message || 'Błędny login lub hasło!';
-                        loginMessage.style.color = 'red';
+                        alert(result.message || 'Błąd logowania!');
                     }
                 } catch (error) {
-                    console.error('Błąd logowania:', error);
-                    loginMessage.textContent = 'Wystąpił błąd podczas logowania. Spróbuj ponownie.';
-                    loginMessage.style.color = 'red';
+                    console.error('Błąd:', error);
+                    alert('Błąd połączenia z serwerem');
                 }
             });
         });
-    </script>
+        </script>
+        
     <div class="dark-mode-switch">
         <label class="switch">
             <input type="checkbox" id="darkModeToggle">

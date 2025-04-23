@@ -59,7 +59,7 @@ body.dark-mode {
 }
 
 .dark-mode .logo {
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+    filter: drop-shadow(0 0 50px white);
 }
 
 .dark-mode h2 {

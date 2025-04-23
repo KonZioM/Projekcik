@@ -12,36 +12,20 @@ $database = 'login_app';
 $conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
-    die(json_encode(['success' => false, 'message' => 'Błąd połączenia z bazą danych: ' . $conn->connect_error]));
+    die(json_encode(['success' => false, 'message' => 'Błąd połączenia z bazą danych']));
 }
 
-$sqlGainers = "SELECT ticker, price, change_percentage FROM market_data WHERE type = 'gain' ORDER BY timestamp DESC LIMIT 5";
-$sqlLosers = "SELECT ticker, price, change_percentage FROM market_data WHERE type = 'loss' ORDER BY timestamp DESC LIMIT 5";
-
+$sqlGainers = "SELECT ticker, price, change_percentage FROM market_data WHERE type='gain'";
+$sqlLosers  = "SELECT ticker, price, change_percentage FROM market_data WHERE type='loss'";
 $resultGainers = $conn->query($sqlGainers);
-$resultLosers = $conn->query($sqlLosers);
+$resultLosers  = $conn->query($sqlLosers);
 
 if (!$resultGainers || !$resultLosers) {
-    echo json_encode(['success' => false, 'message' => 'Błąd pobierania danych z bazy danych.']);
-    exit();
+    echo json_encode(['success' => false]);
+} else {
+    echo json_encode([
+        "gainers" => mysqli_fetch_all($resultGainers),
+        "losers"  => mysqli_fetch_all($resultLosers)
+    ]);
 }
-
-$gainers = [];
-$losers = [];
-
-while ($row = $resultGainers->fetch_assoc()) {
-    $gainers[] = $row;
-}
-
-while ($row = $resultLosers->fetch_assoc()) {
-    $losers[] = $row;
-}
-
-$conn->close();
-
-echo json_encode([
-    'success' => true,
-    'gainers' => $gainers,
-    'losers' => $losers
-]);
 ?>
