@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rynek - WIG</title>
     <link rel="stylesheet" href="rynek.css">
+    <style>
+    .chart {
+        width: 100%;
+        height: 400px;
+        margin-bottom: 20px;
+    }
+    #tv_chart_container {
+        width: 100%;
+        height: 100%;
+        min-height: 400px;
+    }
+    </style>
 </head>
 <body>
     <div class="user-profile">
@@ -27,21 +39,6 @@
         <h2>RYNEK - WIG</h2>
         <div class="chart">
             <div id="tv_chart_container"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-            <script type="text/javascript">
-                new TradingView.widget({
-                    "width": "100%",
-                    "height": "400",
-                    "symbol": "WIG",
-                    "interval": "D",
-                    "timezone": "Europe/Warsaw",
-                    "theme": "light",
-                    "style": "1",
-                    "locale": "pl",
-                    "container_id": "tv_chart_container",
-                    "allow_symbol_change": true
-                });
-            </script>
         </div>
         <div class="market-overview">
             <div class="top-movers">
@@ -80,6 +77,7 @@
         <input type="color" id="colorPicker" value="#000000" style="display: none;">
     </div>
     <canvas id="drawingCanvas"></canvas>
+    <script src="https://s3.tradingview.com/tv.js"></script>
     <script src="rynek.js"></script>
     <script src="rysowanie.js"></script>
 
@@ -101,17 +99,13 @@
                 logo.src = 'logofajne1234.svg';
             }
         }
-
         updateLogo();
-
         const darkModeToggle = document.getElementById('darkModeToggle');
         if (darkModeToggle) {
             darkModeToggle.addEventListener('change', updateLogo);
         }
-
         const observer = new MutationObserver(updateLogo);
         observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-
         if (window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateLogo);
         }
@@ -119,8 +113,10 @@
     </script>
 
     <script>
-    function loadComments() {
-        fetch('get_comments.php')
+    let currentSymbol = 'WIG';
+
+    function loadComments(symbol) {
+        fetch('get_comments.php?symbol=' + encodeURIComponent(symbol))
             .then(res => res.json())
             .then(comments => {
                 const list = document.getElementById('commentsList');
@@ -139,27 +135,61 @@
                 });
             });
     }
-    document.getElementById('commentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const message = document.getElementById('commentText').value.trim();
-        if (!message) return;
+
+    function addComment(message, symbol) {
         fetch('add_comment.php', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({message})
+            body: JSON.stringify({message, symbol})
         })
         .then(res => res.json())
         .then(result => {
             if(result.success){
                 document.getElementById('commentText').value = '';
-                loadComments();
+                loadComments(symbol);
             } else {
                 alert(result.error || 'Błąd dodawania komentarza');
             }
         });
+    }
+
+    document.getElementById('commentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const message = document.getElementById('commentText').value.trim();
+        if (!message) return;
+        addComment(message, currentSymbol);
     });
-    loadComments();
-    setInterval(loadComments, 15000);
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const widget = new TradingView.widget({
+            "width": "100%",
+            "height": 400,
+            "symbol": "WIG",
+            "interval": "D",
+            "timezone": "Europe/Warsaw",
+            "theme": "light",
+            "style": "1",
+            "locale": "pl",
+            "container_id": "tv_chart_container",
+            "allow_symbol_change": true,
+            "save_image": false,
+            "studies": [],
+            "overrides": {},
+            "loading_screen": { backgroundColor: "#fff", foregroundColor: "#4CAF50" }
+        });
+
+        widget.onChartReady(function() {
+            loadComments(currentSymbol);
+
+            widget.activeChart().onSymbolChanged().subscribe(null, function() {
+                const newSymbol = widget.activeChart().symbol();
+                currentSymbol = newSymbol;
+                loadComments(currentSymbol);
+            });
+        });
+
+        setInterval(() => loadComments(currentSymbol), 15000);
+    });
     </script>
 </body>
 </html>
