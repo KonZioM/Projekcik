@@ -5,14 +5,423 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Finansowy</title>
     <link rel="stylesheet" href="quiz.css">
+    <style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url('logowanie.jpg') no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .quiz-container {
+        background: rgba(255,255,255,0.96);
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+        padding: 32px 24px 28px 24px;
+        margin: 60px auto 0 auto;
+        width: 96vw;
+        max-width: 500px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        transition: background 0.3s, color 0.3s;
+    }
+    h1 {
+        text-align: center;
+        color: #4CAF50;
+        font-size: 2.1em;
+        margin-bottom: 28px;
+        letter-spacing: 0.5px;
+    }
+    .question {
+        margin-bottom: 24px;
+        font-size: 1.13em;
+        color: #222;
+        font-weight: 500;
+    }
+    .answers {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .answers label {
+        background: #f3f3f3;
+        border-radius: 8px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 1em;
+        border: 1.5px solid #e0e0e0;
+        transition: background 0.2s, border 0.2s;
+        user-select: none;
+    }
+    .answers label:hover,
+    .answers input:focus + label {
+        background: #e8f5e9;
+        border-color: #4CAF50;
+    }
+    .answers input[type="radio"] {
+        margin-right: 12px;
+        accent-color: #4CAF50;
+    }
+    #submit {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.14em;
+        font-weight: bold;
+        padding: 12px 0;
+        margin-top: 12px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+        transition: background 0.2s;
+    }
+    #submit:hover {
+        background-color: #388e3c;
+    }
+    #results {
+        margin-top: 28px;
+        font-size: 1.22em;
+        font-weight: bold;
+        color: #388e3c;
+        text-align: center;
+        min-height: 32px;
+    }
+    .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: #f44336;
+        color: white;
+        font-size: 16px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 1001;
+        transition: background 0.2s;
+    }
+    .back-button span {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .back-button:hover {
+        background-color: #d32f2f;
+    }
+    .dark-mode-switch {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #333;
+        z-index: 1002;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 54px;
+        height: 28px;
+    }
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 28px;
+    }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+    }
+    input:checked + .slider {
+        background-color: #4CAF50;
+    }
+    input:focus + .slider {
+        box-shadow: 0 0 1px #4CAF50;
+    }
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+    .slider.round {
+        border-radius: 28px;
+    }
+    .slider.round:before {
+        border-radius: 50%;
+    }
+    .dark-mode-switch label[for="darkModeToggle"] {
+        margin-left: 8px;
+        font-size: 16px;
+        color: inherit;
+        cursor: pointer;
+        user-select: none;
+    }
+    @media (max-width: 600px) {
+        .quiz-container {
+            padding: 16px 6vw 16px 6vw;
+            margin: 30px auto 0 auto;
+            max-width: 98vw;
+        }
+        h1 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 1em;
+        }
+        #submit {
+            font-size: 1em;
+            padding: 10px 0;
+        }
+        .back-button {
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+    }
+    body.dark-mode {
+        background: #232323;
+        color: #eee;
+    }
+    body.dark-mode .quiz-container {
+        background: #232323;
+        color: #eee;
+        box-shadow: 0 2px 12px rgba(255,255,255,0.07);
+    }
+    body.dark-mode h1 {
+        color: #64ff6b;
+    }
+    body.dark-mode .question {
+        color: #eee;
+    }
+    body.dark-mode .answers label {
+        background: #232b23;
+        border: 1.5px solid #333;
+        color: #eee;
+    }
+    body.dark-mode .answers label:hover,
+    body.dark-mode .answers input:focus + label {
+        background: #1d4026;
+        border-color: #64ff6b;
+    }
+    body.dark-mode #submit {
+        background-color: #64ff6b;
+        color: #222;
+    }
+    body.dark-mode #submit:hover {
+        background-color: #50d956;
+        color: #222;
+    }
+    body.dark-mode #results {
+        color: #64ff6b;
+    }
+    body {
+    background: url('logowanie.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+body.dark-mode {
+    background: url('logowanie.jpg') no-repeat center center fixed !important;
+    background-size: cover !important;
+    color: #eee;
+}
+
+    </style>
 </head>
 <body>
+    <button onclick="location.href='rynek.html'" class="back-button"><span>&larr;</span> Powrót</button>
+    <div class="dark-mode-switch">
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider round"></span>
+        </label>
+        <label for="darkModeToggle">Tryb Ciemny</label>
+    </div>
     <div class="quiz-container">
         <h1>Quiz Finansowy</h1>
         <div id="quiz"></div>
         <button id="submit">Sprawdź wyniki</button>
         <div id="results"></div>
     </div>
-    <script src="quiz.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.checked = true;
+        }
+        darkModeToggle.addEventListener('change', function() {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    });
+
+    const quizData = [
+        {
+            question: "Co to jest inflacja?",
+            answers: {
+                a: "Wzrost cen towarów i usług",
+                b: "Spadek cen towarów i usług",
+                c: "Stałość cen towarów i usług"
+            },
+            correctAnswer: "a"
+        },
+        {
+            question: "Czym jest budżet osobisty?",
+            answers: {
+                a: "Plan wydatków firmy",
+                b: "Plan przychodów i wydatków osobistych",
+                c: "Rodzaj inwestycji"
+            },
+            correctAnswer: "b"
+        },
+        {
+            question: "Co to jest stopa procentowa?",
+            answers: {
+                a: "Opłata za przechowywanie pieniędzy w banku",
+                b: "Procent zysku z inwestycji",
+                c: "Koszt pożyczenia pieniędzy wyrażony w procentach"
+            },
+            correctAnswer: "c"
+        },
+        {
+            question: "Czym jest fundusz emerytalny?",
+            answers: {
+                a: "Rodzaj kredytu bankowego",
+                b: "Program oszczędzania na emeryturę",
+                c: "Forma ubezpieczenia na życie"
+            },
+            correctAnswer: "b"
+        },
+        {
+            question: "Co to jest kapitalizacja odsetek?",
+            answers: {
+                a: "Dodawanie odsetek do kapitału",
+                b: "Odejmowanie odsetek od kapitału",
+                c: "Wypłacanie odsetek w gotówce"
+            },
+            correctAnswer: "a"
+        },
+        {
+            question: "Czym jest dywersyfikacja portfela inwestycyjnego?",
+            answers: {
+                a: "Inwestowanie wszystkich środków w jeden rodzaj aktywów",
+                b: "Rozłożenie inwestycji na różne rodzaje aktywów",
+                c: "Sprzedaż wszystkich inwestycji"
+            },
+            correctAnswer: "b"
+        },
+        {
+            question: "Co to jest zdolność kredytowa?",
+            answers: {
+                a: "Suma wszystkich kredytów danej osoby",
+                b: "Zdolność banku do udzielania kredytów",
+                c: "Zdolność osoby do spłaty zaciągniętego kredytu"
+            },
+            correctAnswer: "c"
+        },
+        {
+            question: "Czym jest kryptowaluta?",
+            answers: {
+                a: "Rodzaj waluty papierowej",
+                b: "Cyfrowa lub wirtualna waluta",
+                c: "Waluta używana tylko w bankach"
+            },
+            correctAnswer: "b"
+        },
+        {
+            question: "Co to jest płynność finansowa?",
+            answers: {
+                a: "Zdolność do regulowania bieżących zobowiązań",
+                b: "Ilość gotówki w portfelu",
+                c: "Szybkość przepływu pieniędzy w gospodarce"
+            },
+            correctAnswer: "a"
+        },
+        {
+            question: "Czym jest obligacja?",
+            answers: {
+                a: "Rodzaj akcji spółki",
+                b: "Papier wartościowy potwierdzający dług",
+                c: "Forma ubezpieczenia majątkowego"
+            },
+            correctAnswer: "b"
+        }
+    ];
+
+    function buildQuiz() {
+        const output = [];
+        quizData.forEach((currentQuestion, questionNumber) => {
+            const answers = [];
+            for (letter in currentQuestion.answers) {
+                answers.push(
+                    `<label>
+                        <input type="radio" name="question${questionNumber}" value="${letter}">
+                        ${letter} : ${currentQuestion.answers[letter]}
+                    </label>`
+                );
+            }
+            output.push(
+                `<div class="question">
+                    <p>${currentQuestion.question}</p>
+                    <div class="answers">${answers.join('')}</div>
+                </div>`
+            );
+        });
+        document.getElementById('quiz').innerHTML = output.join('');
+    }
+
+    function showResults() {
+        const answerContainers = document.querySelectorAll('.answers');
+        let numCorrect = 0;
+        quizData.forEach((currentQuestion, questionNumber) => {
+            const answerContainer = answerContainers[questionNumber];
+            const selector = `input[name=question${questionNumber}]:checked`;
+            const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+            if (userAnswer === currentQuestion.correctAnswer) {
+                numCorrect++;
+                answerContainers[questionNumber].style.color = 'green';
+            } else {
+                answerContainers[questionNumber].style.color = 'red';
+            }
+        });
+        document.getElementById('results').innerHTML = `Twój wynik: <b>${numCorrect} z ${quizData.length}</b>`;
+    }
+
+    buildQuiz();
+    document.getElementById('submit').addEventListener('click', showResults);
+    </script>
 </body>
 </html>

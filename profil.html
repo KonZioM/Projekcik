@@ -7,46 +7,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="user-profile">
-        <div class="profile-icon" onclick="toggleProfileMenu()">
-            <img src="user-icon.png" alt="Profil użytkownika" id="profileImage">
-        </div>
-        <div class="profile-menu" id="profileMenu">
-            <ul>
-                <li><a href="profil.html">Profil</a></li>
-                <li><a href="ustawienia.html">Ustawienia</a></li>
-                <li><a href="logout.php">Wyloguj się</a></li>
-            </ul>
-        </div>
-    </div>
 
-    <div class="market-container">
-        <div class="logo-container">
-            <img src="logofajne1234.svg" alt="Logo" class="logo">
-        </div>
-        <h2>Profil użytkownika</h2>
-        
-        <div class="profile-info">
-            <div class="current-data">
-                <p>Aktualna nazwa: <span id="currentUsername"></span></p>
-                <img src="" alt="Aktualne zdjęcie profilowe" id="currentProfileImage" class="profile-preview">
+
+    <div class="profile-layout">
+        <div class="market-container">
+            <div class="logo-container">
+                <img src="logofajne1234.svg" alt="Logo" class="logo" id="mainLogo">
             </div>
-
-            <form id="changeUsernameForm">
-                <h3>Zmiana nazwy użytkownika</h3>
-                <input type="text" id="newUsername" placeholder="Nowa nazwa użytkownika" required>
-                <button type="submit">Zapisz zmiany</button>
-            </form>
-
-            <form id="changeProfileImageForm">
-                <h3>Zmiana zdjęcia profilowego</h3>
-                <input type="file" id="profileImageInput" accept="image/*" required>
-                <button type="submit">Zaktualizuj zdjęcie</button>
-            </form>
-            
-            <button onclick="location.href='rynek.html'" class="back-button">Powrót do rynku</button>
+            <h2>Profil użytkownika</h2>
+            <div class="profile-info">
+                <div class="current-data">
+                    <p>Aktualna nazwa: <span id="currentUsername"></span></p>
+                    <img src="" alt="Aktualne zdjęcie profilowe" id="currentProfileImage" class="profile-preview">
+                </div>
+                <form id="changeUsernameForm">
+                    <h3>Zmiana nazwy użytkownika</h3>
+                    <input type="text" id="newUsername" placeholder="Nowa nazwa użytkownika" required>
+                    <button type="submit">Zapisz zmiany</button>
+                </form>
+                <form id="changeProfileImageForm">
+                    <h3>Zmiana zdjęcia profilowego</h3>
+                    <input type="file" id="profileImageInput" accept="image/*" required>
+                    <button type="submit">Zaktualizuj zdjęcie</button>
+                </form>
+                <button onclick="location.href='rynek.html'" class="back-button">Powrót do rynku</button>
+            </div>
+        </div>
+        <div class="activity-container">
+            <h2>Historia aktywności</h2>
+            <ul id="activityList"></ul>
         </div>
     </div>
+
     <div class="dark-mode-switch">
         <label class="switch">
             <input type="checkbox" id="darkModeToggle">
@@ -55,24 +47,21 @@
         <label for="darkModeToggle">Tryb Ciemny</label>
     </div>
     <script src="script.js" defer></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const username = localStorage.getItem('username') || 'Gość';
             const profileImage = localStorage.getItem('profileImage');
-            
             document.getElementById('currentUsername').textContent = username;
-            
             if(profileImage) {
                 document.getElementById('currentProfileImage').src = profileImage;
                 document.getElementById('profileImage').src = profileImage;
             }
+            document.getElementById('profileMenu').style.display = 'none';
         });
 
         document.getElementById('changeUsernameForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const newUsername = document.getElementById('newUsername').value;
-            
             if(newUsername) {
                 localStorage.setItem('username', newUsername);
                 document.getElementById('currentUsername').textContent = newUsername;
@@ -83,7 +72,6 @@
         document.getElementById('changeProfileImageForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const file = document.getElementById('profileImageInput').files[0];
-            
             if(file) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
@@ -98,60 +86,45 @@
         });
 
         function toggleProfileMenu() {
-        const menu = document.getElementById('profileMenu');
-        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    }
-
-    document.addEventListener('click', (e) => {
-        if(!e.target.closest('.user-profile')) {
-            document.getElementById('profileMenu').style.display = 'none';
+            const menu = document.getElementById('profileMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         }
-    });
 
-    document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('profileMenu').style.display = 'none';
-    });
-    
-    </script>
-
-<style>
-    .profile-menu {
-        display: none;
-        position: absolute;
-        top: 50px;
-        left: 0;
-        background: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-        padding: 10px;
-        min-width: 150px;
-        z-index: 1000; 
-    }
-    .user-profile {
-        display: none;
-    }
-</style>
-<div class="activity-container">
-    <h2>Historia aktywności</h2>
-    <ul id="activityList"></ul>
-</div>
-<script>
-    fetch('get_user_activity.php')
-        .then(response => response.json())
-        .then(data => {
-            const activityList = document.getElementById('activityList');
-            data.forEach(activity => {
-                const li = document.createElement('li');
-                li.textContent = `${activity.action} - ${activity.timestamp}`;
-                activityList.appendChild(li);
-            });
-        })
-        .catch(error => {
-            console.error('Błąd podczas pobierania historii aktywności:', error);
+        document.addEventListener('click', (e) => {
+            if(!e.target.closest('.user-profile')) {
+                document.getElementById('profileMenu').style.display = 'none';
+            }
         });
 
-        
-</script>
+        fetch('get_user_activity.php')
+            .then(response => response.json())
+            .then(data => {
+                const activityList = document.getElementById('activityList');
+                data.forEach(activity => {
+                    const li = document.createElement('li');
+                    li.textContent = `${activity.action} - ${activity.timestamp}`;
+                    activityList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error('Błąd podczas pobierania historii aktywności:', error);
+            });
 
+        function updateLogo() {
+            const logo = document.getElementById('mainLogo');
+            if (document.body.classList.contains('dark-mode')) {
+                logo.src = 'logofajne123.svg';
+            } else {
+                logo.src = 'logofajne1234.svg';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', updateLogo);
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('change', updateLogo);
+        }
+        const observer = new MutationObserver(updateLogo);
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    </script>
 </body>
 </html>

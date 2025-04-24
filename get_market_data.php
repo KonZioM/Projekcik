@@ -17,15 +17,29 @@ if ($conn->connect_error) {
 
 $sqlGainers = "SELECT ticker, price, change_percentage FROM market_data WHERE type='gain'";
 $sqlLosers  = "SELECT ticker, price, change_percentage FROM market_data WHERE type='loss'";
+
 $resultGainers = $conn->query($sqlGainers);
 $resultLosers  = $conn->query($sqlLosers);
 
-if (!$resultGainers || !$resultLosers) {
-    echo json_encode(['success' => false]);
-} else {
-    echo json_encode([
-        "gainers" => mysqli_fetch_all($resultGainers),
-        "losers"  => mysqli_fetch_all($resultLosers)
-    ]);
+$gainers = [];
+$losers = [];
+
+if ($resultGainers) {
+    while ($row = $resultGainers->fetch_assoc()) {
+        $gainers[] = $row;
+    }
 }
+if ($resultLosers) {
+    while ($row = $resultLosers->fetch_assoc()) {
+        $losers[] = $row;
+    }
+}
+
+echo json_encode([
+    'success' => true,
+    'gainers' => $gainers,
+    'losers'  => $losers
+]);
+
+$conn->close();
 ?>

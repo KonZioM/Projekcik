@@ -10,7 +10,7 @@
     <button onclick="location.href='index.html'" class="back-button"><span>&larr;</span> Powrót</button>
     <div class="main-container">
         <div class="logo-container">
-            <img src="Logo.png" alt="Logo naszej firmy" class="logo">
+            <img src="logofajne1234.svg" alt="Logo naszej firmy" class="logo" id="mainLogo">
         </div>
         <h1></h1>
         <div>
@@ -62,5 +62,33 @@
         <label for="darkModeToggle">Tryb Ciemny</label>
     </div>
     <script src="script.js" defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function updateLogo() {
+                const logo = document.getElementById('mainLogo');
+                if (!logo) return;
+                if (document.body.classList.contains('dark-mode')) {
+                    logo.src = 'logofajne123.svg';
+                } else {
+                    logo.src = 'logofajne1234.svg';
+                }
+            }
+        
+            updateLogo();
+        
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('change', updateLogo);
+            }
+        
+            const observer = new MutationObserver(updateLogo);
+            observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+        
+            if (window.matchMedia) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateLogo);
+            }
+        });
+        </script>
 </body>
 </html>

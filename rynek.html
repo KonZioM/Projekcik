@@ -9,7 +9,7 @@
 <body>
     <div class="user-profile">
         <div class="profile-icon" onclick="toggleProfileMenu()">
-            <img src="user-icon.png" alt="Profil użytkownika">
+            <img src="user-icon.png" alt="Profil użytkownika" id="profileImage">
         </div>
         <div class="profile-menu" id="profileMenu">
             <ul>
@@ -22,7 +22,7 @@
     <a href="quiz.html" class="quiz-button">Quiz Finansowy</a>
     <div class="market-container">
         <div class="logo-container">
-            <img src="logofajne1234.svg" alt="Logo" class="logo">
+            <img src="logofajne1234.svg" alt="Logo" class="logo" id="mainLogo">
         </div>
         <h2>RYNEK - WIG</h2>
         <div class="chart">
@@ -84,6 +84,41 @@
     <script src="rysowanie.js"></script>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const profileImage = localStorage.getItem('profileImage');
+        const img = document.getElementById('profileImage');
+        if (profileImage) {
+            img.src = profileImage;
+        } else {
+            img.src = 'user-icon.png';
+        }
+
+        function updateLogo() {
+            const logo = document.getElementById('mainLogo');
+            if (document.body.classList.contains('dark-mode')) {
+                logo.src = 'logofajne123.svg';
+            } else {
+                logo.src = 'logofajne1234.svg';
+            }
+        }
+
+        updateLogo();
+
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('change', updateLogo);
+        }
+
+        const observer = new MutationObserver(updateLogo);
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateLogo);
+        }
+    });
+    </script>
+
+    <script>
     function loadComments() {
         fetch('get_comments.php')
             .then(res => res.json())
@@ -126,134 +161,5 @@
     loadComments();
     setInterval(loadComments, 15000);
     </script>
-    <style>
-    .comments-section {
-        background: rgba(255,255,255,0.96);
-        border-radius: 12px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-        padding: 24px 18px 18px 18px;
-        margin: 40px auto 0 auto;
-        width: 96%;
-        max-width: 800px;
-        box-sizing: border-box;
-        transition: background 0.3s, color 0.3s;
-    }
-    .comments-section h3 {
-        margin-top: 0;
-        color: #4CAF50;
-        font-size: 1.3em;
-        text-align: center;
-        letter-spacing: 0.5px;
-    }
-    #commentForm {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 18px;
-    }
-    #commentForm textarea {
-        width: 100%;
-        min-height: 70px;
-        max-height: 200px;
-        resize: vertical;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 1em;
-        padding: 10px;
-        background: #f9f9f9;
-        color: #222;
-        transition: background 0.3s, color 0.3s;
-    }
-    #commentForm button {
-        align-self: flex-end;
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 28px;
-        border: none;
-        border-radius: 8px;
-        font-size: 1em;
-        cursor: pointer;
-        transition: background 0.2s;
-    }
-    #commentForm button:hover {
-        background-color: #388e3c;
-    }
-    #commentsList {
-        margin-top: 8px;
-    }
-    .comment {
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-        padding: 14px 14px 10px 14px;
-        margin-bottom: 14px;
-        word-break: break-word;
-        transition: background 0.3s, color 0.3s;
-    }
-    .comment-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 5px;
-    }
-    .comment-author {
-        font-weight: bold;
-        color: #388e3c;
-        font-size: 1em;
-    }
-    .comment-date {
-        font-size: 0.92em;
-        color: #888;
-    }
-    .comment-body {
-        font-size: 1em;
-        color: #222;
-    }
-    @media (max-width: 900px) {
-        .comments-section {
-            max-width: 99vw;
-            padding: 12px 2vw 12px 2vw;
-        }
-    }
-    @media (max-width: 600px) {
-        .comments-section {
-            padding: 8px 1vw 8px 1vw;
-        }
-        .comment-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2px;
-        }
-        .comment {
-            font-size: 0.97em;
-        }
-    }
-    body.dark-mode .comments-section {
-        background: rgba(40,40,40,0.98);
-        color: white;
-    }
-    body.dark-mode #commentForm textarea {
-        background: #222;
-        color: #eee;
-        border: 1px solid #444;
-    }
-    body.dark-mode .comment {
-        background: #888;   
-        box-shadow: 0 1px 4px rgba(255,255,255,0.06);
-    }
-    body.dark-mode .comment-author {
-        color: #64ff6b;
-    }
-    body.dark-mode .comment-date {
-        color: #bbb;
-    }
-    body.dark-mode #commentForm button {
-        background-color: #64ff6b;
-        color: #222;
-    }
-    body.dark-mode #commentForm button:hover {
-        background-color: #50d956;
-    }
-    </style>
 </body>
 </html>

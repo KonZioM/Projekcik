@@ -1,81 +1,164 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    background: url('logowanie.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .quiz-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    max-width: 600px;
-    width: 90%;
-    margin: 20px auto;
+    background: rgba(255,255,255,0.96);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 32px 24px 28px 24px;
+    margin: 60px auto 0 auto;
+    width: 96vw;
+    max-width: 500px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    transition: background 0.3s, color 0.3s;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #4CAF50;
+    font-size: 2.1em;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
 }
 
 .question {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    font-size: 1.13em;
+    color: #222;
+    font-weight: 500;
 }
 
 .answers {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .answers label {
-    display: block;
-    margin-bottom: 10px;
+    background: #f3f3f3;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1em;
+    border: 1.5px solid #e0e0e0;
+    transition: background 0.2s, border 0.2s;
+    user-select: none;
+}
+
+.answers label:hover,
+.answers input:focus + label {
+    background: #e8f5e9;
+    border-color: #4CAF50;
+}
+
+.answers input[type="radio"] {
+    margin-right: 12px;
+    accent-color: #4CAF50;
 }
 
 #submit {
-    display: block;
-    width: 100%;
-    padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 8px;
+    font-size: 1.14em;
+    font-weight: bold;
+    padding: 12px 0;
+    margin-top: 12px;
     cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+    transition: background 0.2s;
 }
 
 #submit:hover {
-    background-color: #45a049;
+    background-color: #388e3c;
 }
 
 #results {
-    margin-top: 20px;
+    margin-top: 28px;
+    font-size: 1.22em;
     font-weight: bold;
+    color: #388e3c;
+    text-align: center;
+    min-height: 32px;
 }
 
-/* Nowy styl dla przycisku quizu */
-.quiz-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+@media (max-width: 600px) {
+    .quiz-container {
+        padding: 16px 6vw 16px 6vw;
+        margin: 30px auto 0 auto;
+        max-width: 98vw;
+    }
+    h1 {
+        font-size: 1.3em;
+        margin-bottom: 20px;
+    }
+    .question {
+        font-size: 1em;
+    }
+    #submit {
+        font-size: 1em;
+        padding: 10px 0;
+    }
 }
 
-.quiz-button:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+body.dark-mode {
+    background: #232323;
+    color: #eee;
 }
 
-.quiz-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+body.dark-mode .quiz-container {
+    background: #232323;
+    color: #eee;
+    box-shadow: 0 2px 12px rgba(255,255,255,0.07);
+}
+
+body.dark-mode h1 {
+    color: #64ff6b;
+}
+
+body.dark-mode .question {
+    color: #eee;
+}
+
+body.dark-mode .answers label {
+    background: #232b23;
+    border: 1.5px solid #333;
+    color: #eee;
+}
+
+body.dark-mode .answers label:hover,
+body.dark-mode .answers input:focus + label {
+    background: #1d4026;
+    border-color: #64ff6b;
+}
+
+body.dark-mode #submit {
+    background-color: #64ff6b;
+    color: #222;
+}
+
+body.dark-mode #submit:hover {
+    background-color: #50d956;
+    color: #222;
+}
+
+body.dark-mode #results {
+    color: #64ff6b;
 }
