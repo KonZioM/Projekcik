@@ -1,4 +1,4 @@
-const apiKey = '00HG5ZI4XSCD3MAO';
+const apiKey = 'nie ma';
 
 document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
